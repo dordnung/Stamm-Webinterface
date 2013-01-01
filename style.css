@@ -1,0 +1,36 @@
+table.anztable
+{
+	border-color: #ffffff;
+	background-color: #000000;
+	width: 832px;
+}
+
+td.tablekopf
+{
+	background: #426283;
+	background-image: url(pics/th.gif);
+	color:#ffffff;
+	font-family:Verdana;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+tr.tableinhalt_1 
+{
+	background: #333030;
+}
+
+tr.tableinhalt_2 
+{
+	background: #3c3939;
+}
+
+tr.tableinhalt_3 
+{
+	background: #1e1c1c;
+}
+
+tr.tableinhalt_4 
+{
+	background: #f8bb01;
+}

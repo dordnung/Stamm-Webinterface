@@ -1,0 +1,11 @@
+<form style="margin:0" method="post" action="index.php{extracommand}">
+	<span class="text1">Search:</span>
+	<select name="serachcat">
+		<!-- BEGIN scrollsearchblock -->
+			<option value="{scrollserachcatvalue}"{scrollserachcatselected}>{scrollserachcat}</option>
+		<!-- END scrollsearchblock -->
+	</select>
+	<input class="input5" name="searchstring" type="text" value="{searchstring}">
+	<input name="searchbutton" type="submit" id="search" value="&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+	{showmore}
+</form>

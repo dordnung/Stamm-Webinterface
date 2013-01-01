@@ -1,0 +1,76 @@
+{header}
+
+<center>
+
+	<img src="inc/pics/logo.jpg" alt="Logo" border="0">
+
+	<br><br>
+
+	<table class="anztable" cellSpacing="1" cellPadding="4">
+		<tbody>
+			<tr>
+				<td class="tablekopf" colspan="5">PayPal</td>
+			</tr>
+			<tr class="tableinhalt_4" >
+				<td align="center" colspan="1" width="20%"><a class="link2" href="index.php">Back to Stamm List</a></td>
+				<td align="center" colspan="3" width="60%"><b>Here you can buy Stamm Points</b></td>
+				<td align="center" colspan="1" width="20%"><a class="link2" href="logout.php">Logout </a></td>
+			</tr>
+			<!-- BEGIN valid -->
+			<tr class="tableinhalt_1" align="center">
+				<td colspan="5" class="page_switch_links">
+					<H3>You have {typepoints} Stamm Points</H3>
+					{text}
+				</td>
+			</tr>
+			<tr class="tableinhalt_2" align="center">
+				<td colspan="5" class="page_switch_links">
+					<form action="https://ipnpb.paypal.com/cgi-bin/webscr" method="post" target="theWin" onsubmit="window.open('','theWin','height=800px, width=1000px');">
+						<input type="hidden" name="cmd" value="_xclick" />
+						<input type="hidden" name="notify_url" value="{returnURL}">
+						<input type="hidden" name="item_name" value="Stamm Points"> 
+						<input type="hidden" name="business" value="{PaypalEmail}" />
+						<input type="hidden" name="rm" value="2" />
+						<input type="hidden" name="lc" value="{Language}" />
+						<input type="hidden" name="custom" value="{steamid}" />
+						<input type="hidden" name="no_shipping" value="1" />
+						<input type="hidden" name="address_override" value="1" />
+						<table>
+							<input type="hidden" name="on0" value="Stamm Points"><H2><u>Buy Stamm Points:</u></H2></td></tr><tr align="center"><td><select name="os0">
+								<!-- BEGIN paydetails -->
+									<option value="{points}">{points} Points: {value} {paypal_country}</option>
+								<!-- END paydetails -->
+							</select> </td></tr>
+						</table>
+						<!-- BEGIN paydetailsc -->
+							<input type="hidden" name="option_select{index_set}" value="{points_set}">
+							<input type="hidden" name="option_amount{index_set}" value="{value_set}">
+						<!-- END paydetailsc -->
+						<input type="hidden" name="currency_code" value="{country}">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					</form>
+				</td>
+			</tr>
+			<!-- END valid -->
+			<!-- BEGIN invalid -->
+			<tr class="tableinhalt_1" align="center">
+				<td colspan="5" class="page_switch_links">
+					<h1>You are not registered on our Server</h1>
+				</td>
+			</tr>
+			<tr class="tableinhalt_2" align="center">
+				<td colspan="5" class="page_switch_links">
+					<h2>Please visit it first!</h2>
+				</td>
+			</tr>
+			<!-- END invalid -->
+			<tr class="tableinhalt_3">
+				<td colspan="5" align="center">
+					<span class="page_switch_links"><h4>Steamid: {steamid}</h4></span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</center>  
+  
+{footer}

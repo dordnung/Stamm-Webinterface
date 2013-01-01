@@ -1,0 +1,152 @@
+.myaccount 
+{
+	background-color: #f8bb01;
+	font: normal 12px arial,verdana;
+	padding: 2px 5px;
+	border: 1px solid #f8bb01;
+}
+
+.main 
+{
+	font: normal 12px arial,verdana;
+	padding: 2px;
+	margin: 2px;
+}
+
+table.anztable
+{
+	border-color: #ffffff;
+	background-color: #000000;
+	width: 832px;
+}
+
+td.tablekopf
+{
+	background: #426283;
+	background-image: url(pics/th.gif);
+	color:#ffffff;
+	font-family:Verdana;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+tr.tableinhalt_1 
+{
+	background: #333030;
+}
+
+tr.tableinhalt_2 
+{
+	background: #3c3939;
+}
+
+tr.tableinhalt_3 
+{
+	background: #1e1c1c;
+}
+
+tr.tableinhalt_4 
+{
+	background: #f8bb01;
+}
+
+.text1
+{
+	color:#e5e5e6;
+	font-family:Verdana;
+	font-size: 12px;
+}
+
+.page_switch_links
+{
+	color:#e5e5e6;
+	font-family:Verdana;
+	font-size: 12px;
+}
+
+a.page_switch:link
+{
+	color:#ffffff;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+}
+a.page_switch:visited 
+{
+	color:#ffffff;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+}
+
+a.page_switch:hover 
+{
+	color:#ffffff;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+}
+
+a.page_switch:active 
+{
+	color:#000000;
+	text-decoration:none;
+	font-size: 12px;
+}
+
+a.link2:link 
+{
+	color:#000000;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+}
+a.link2:visited 
+{
+	color:#000000;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+}
+a.link2:hover 
+{
+	color:#000000;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+	font-weight: bold;
+}
+a.link2:active 
+{
+	color:#000000;
+	text-decoration:none;
+	font-size: 12px;
+}
+a.link1:link 
+{
+	color:#ffffff;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+}
+a.link1:visited 
+{
+	color:#ffffff;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+}
+a.link1:hover 
+{
+	color:#ffffff;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size: 12px;
+	font-weight: bold;
+}
+a.link1:active 
+{
+	color:#ffffff;
+	text-decoration:none;
+	font-size: 12px;
+}

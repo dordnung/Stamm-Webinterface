@@ -1,0 +1,44 @@
+/**
+ *  Stamm Webinterface
+ *
+ *  The Webinterface for the Stamm Plugin
+ *
+ *  https://github.com/popoklopsi/Stamm-Webinterface
+ *  http://forums.alliedmods.net/showthread.php?p=1338942
+ *
+ *  @author     Popoklopsi
+ *  @copyright  (c) 2012 - David Ordnung
+ *  @version    1.1
+ */
+ 
+ 1. Abhängigkeiten:
+	Du brauchst eine Homepage mit MySQL Datenbank und PHP.
+	Um PayPal zu benutzen, musst bei deiner Homepage PHP Konfiguration cURL und Open SSL aktiviert sein.
+	Außerdem brauchst du einen Mail Service.
+	
+	Für PayPal brauchst du auch einen PayPal Account mit Instant Payment Notification
+	https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_admin_IPNSetup
+	
+ 2. MySQL
+	Importiere die dbsql.sql mit PHPMyAdmin in deine Mysql Datenbank.
+	
+ 3. Konfiguration
+	3.1 Serverliste
+		Wenn du Stamm auf mehreren Server laufen lässt, hast du die Möglichkeit vorab eine Serverliste anzuzeigen.
+		Für jeden Server kopierst du den Ordner "Server" und benennst ihn um.
+		Anschließend öffnest du die config.php im Hauptordner und fügst deinen Server dort hinzu.
+		Du kannst für jeden Server ein eigenes Bild in den "pics" Ordner legen.
+	3.2 Webinterface
+		Öffne die config.php im Server Ordner und stelle alles richtig ein!
+		
+ 4. Bilder
+	Im "pics" Ordner findest du die .psd Dateien der Header Bilder.
+	Diese kannst du auf deine Community anpassen und anschließend als .jpg speichern.
+	Die logo.jpg gehört auch im Server Ordner unter "inc/pics" geändert!
+	
+ 5. Hochladen
+	Lade nun alles auf deinen Webspace und nun sollte alles funktionieren!
+	
+ 6. Farben ändern
+	Wenn dir die Farben nicht gefallen, kannst du die style.css im Hauptordner und im Server Ordner unter "inc" anpassen!
+	

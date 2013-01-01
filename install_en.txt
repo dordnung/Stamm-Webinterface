@@ -1,0 +1,44 @@
+/**
+ *  Stamm Webinterface
+ *
+ *  The Webinterface for the Stamm Plugin
+ *
+ *  https://github.com/popoklopsi/Stamm-Webinterface
+ *  http://forums.alliedmods.net/showthread.php?p=1338942
+ *
+ *  @author     Popoklopsi
+ *  @copyright  (c) 2012 - David Ordnung
+ *  @version    1.1
+ */
+ 
+ 1. Dependencies:
+	You need a homepage with MySQL and PHP.
+	To use PayPal, you have to activate cURL und Open SSL in your PHP settings.
+	Also you need a Mail Service.
+	
+	For PayPal you also need a PayPal account with Instant Payment Notification
+	https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_admin_IPNSetup
+	
+ 2. MySQL
+	Import the dbsql.sql with PHPMyAdmin into your MySQL database.
+	
+ 3. Configuration
+	3.1 Serverlist
+		If you run stamm on more than one server, than you can create a overview of the servers.
+		For every server you have to copy the "Server" folder and you have to rename it.
+		Afterwards you have to open the "config.php" in the mainfolder and have to add the server there.
+		For every server you can have a own pic in the "pics" folder.
+	3.2 Webinterface
+		Open the "config.php" in the server folder and set up everything.
+		
+ 4. Pictures
+	In the "pics" folder you find the .psd files of all header pictures.
+	These you can modify for your community and save them as .jpg.
+	You have to modify the "logo.jpg" also in the server folder under "inc/pics"!
+	
+ 5. Upload
+	Now load up everything to your webspace and you are ready to go!
+	
+ 6. Changing Colors
+	If you don't like the colors, you can modify the "style.css" in the mainfolder and in the server folder under "inc"!
+	
