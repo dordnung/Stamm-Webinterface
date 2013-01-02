@@ -63,8 +63,8 @@
 		else
 			$levelname = $akeys[(int)$level];
 		
-		if ((int)$level != count($level_settings)) $text = "<H3>You need $left Stamm Points to become $levelname VIP</H3>";
-		else $text = "<H3>You are already the highest VIP</H3>";
+		if ((int)$level != count($level_settings)) $text = "<h2>You need $left Stamm Points to become $levelname VIP</h2>";
+		else $text = "<h2>You are already the highest VIP</h2>";
 		
 		$tpl->set_var(array(
 			"typepoints"   => $typepoints,

@@ -127,7 +127,9 @@
 	
 			$name = str_replace("{", "", $row['name']);
 			$name = str_replace("}", "", $name);
-
+			$name = str_replace("<", "&lt;", $name);
+			$name = str_replace("&", "&amp;", $name);
+			
 			if ($paypal_enable == 1)
 			{
 				if (validate())
@@ -150,7 +152,7 @@
 					
 					$login = '
 						<tr class="tableinhalt_4" >
-						<td align = "center" colspan="2"><a class="link2" href="'.$url.'"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" /></a></td>
+						<td align = "center" colspan="2"><a class="link2" href="'.$url.'"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></a></td>
 						<td align = "center" colspan="2"><b>Login, to buy Stamm Points</b></td>
 						<td align = "center" colspan="2"><a class="link2" href="../index.php">Back to Servers</a></td>
 						</tr>';

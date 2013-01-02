@@ -216,8 +216,7 @@
 				"scrollserachcat" => $allsearchcategories['view'][$x]
 			));
 
-			if ($allsearchcategories['value'][$x]==$searchcat) $tpl->set_var(array("scrollserachcatselected" => "SELECTED"));
-			else $tpl->set_var(array("scrollserachcatselected" => ""));
+			$tpl->set_var(array("scrollserachcatselected" => ""));
 
 			$tpl->parse("scrollsearchblock_handle", "scrollsearchblock", true);
 		}
@@ -229,7 +228,7 @@
 		  
 			$result = mysql_query($sql) OR die(mysql_error());
 				  
-			if(mysql_num_rows($result)) $showmore = '<input name="ownbutton" type="submit" id="ownbutton" value="&nbsp;&nbsp;&nbsp;&nbsp;Your Ranking&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">';
+			if(mysql_num_rows($result)) $showmore = '<input name="ownbutton" type="submit" id="ownbutton" value="&nbsp;&nbsp;&nbsp;&nbsp;Your Ranking&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />';
 			else $showmore = "";
 		}
 		else $showmore = "";
@@ -306,7 +305,7 @@
 		$tpl->set_var(array("section"  => $section));
 
 		if ($searchcat != '') $tpl->set_var(array("searchcat" => 'searchcat='.$searchcat.''));
-		if ($searchstring != '') $tpl->set_var(array("searchstring" => '&search='.$searchstring.''));
+		if ($searchstring != '') $tpl->set_var(array("searchstring" => '&amp;search='.$searchstring.''));
 		if ($extracommand != '') $tpl->set_var(array("extracommand" => $extracommand));
 
 		if  ($current_site == 1){}
