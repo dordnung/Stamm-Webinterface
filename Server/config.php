@@ -20,6 +20,9 @@ $show_users = "20";					// How much users per page
 									// Spieler pro Seite
 $points_min = "100"; 				// Minimum Stamm Points of Players in VIP List
 									// Minimale Punkte um in der Liste zu stehen
+									
+$use_overview = 1;					// 1 = linking Back to the server overview, 0 = don't do
+									// 1 = Zurück zur Server Übersicht linken, 0 = Nicht machen
 
 // PayPal Settings -------------------------------------------------------------
 
@@ -28,10 +31,10 @@ $points_min = "100"; 				// Minimum Stamm Points of Players in VIP List
 $paypal_enable = 1; 				// 1 = enable Paypal, 0 = Disable
 									// 1 = PayPal aktivieren, 0 = Deaktivieren
 $paypal_email = "your@email.com"; 	// PayPal Email
-$paypal_language = "US"; 			// Two Letter language code , all see here: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_nvp_country_codes
-									// Sprach Code, siehe hier: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_nvp_country_codes
-$paypal_country = "USD"; 			// Your currency, list over all currencies: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_nvp_currency_codes
-									// Deine Währung, siehe hier: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_nvp_currency_codes
+$paypal_language = "US"; 			// Two Letter language code , all see here: https://www.x.com/developers/paypal/documentation-tools/api/country-codes
+									// Sprach Code, siehe hier: https://www.x.com/developers/paypal/documentation-tools/api/country-codes
+$paypal_country = "USD"; 			// Your currency, list over all currencies: https://www.x.com/content/currency-codes-e_howto_api_soap_currency_codes-html
+									// Deine Währung, siehe hier: https://www.x.com/content/currency-codes-e_howto_api_soap_currency_codes-html
 $paypal_options = 
 array
 (

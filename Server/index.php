@@ -138,31 +138,65 @@
 				
 					if ($row['steamid'] == $steamid) $linecolor = 4;
 					
-					$login = '
-						<tr class="tableinhalt_4" >
-						<td align = "center" colspan="2"><a class="link2" href="paypal.php">Paypal</a></td>
-						<td align = "center" colspan="3"><a class="link2" href="../index.php">Back to Servers</a></td>
-						<td align = "center" colspan="1"><a class="link2" href="logout.php">Logout</a></td>
-						</tr>';
+					if ($use_overview)
+					{
+						$login = '
+							<tr class="tableinhalt_4" >
+							<td align="center" colspan="3"><a class="link2" href="paypal.php">Buy Stamm Points</a></td>
+							<td align="center" colspan="2"><a class="link2" href="logout.php">Logout</a></td>
+							<td align="center" colspan="1"><a class="link2" href="../index.php">Back to Servers</a></td>
+							</tr>';
+					}
+					else
+					{
+						$login = '
+							<tr class="tableinhalt_4" >
+							<td align="center" colspan="3"><a class="link2" href="paypal.php">Buy Stamm Points</a></td>
+							<td align="center" colspan="3"><a class="link2" href="logout.php">Logout</a></td>
+							</tr>';
+					}
 				} 
 				else 
 				{
 					$url = genUrl(curPageURL());
 					$notice = 'Login, to buy Stamm Points via PayPal!';
 					
-					$login = '
-						<tr class="tableinhalt_4" >
-						<td align = "center" colspan="2"><a class="link2" href="'.$url.'"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></a></td>
-						<td align = "center" colspan="2"><b>Login, to buy Stamm Points</b></td>
-						<td align = "center" colspan="2"><a class="link2" href="../index.php">Back to Servers</a></td>
-						</tr>';
+					if ($use_overview)
+					{
+						$login = '
+							<tr class="tableinhalt_4" >
+							<td align="center" colspan="2"><a class="link2" href="'.$url.'"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></a></td>
+							<td align="center" colspan="2"><b>Login, to buy Stamm Points</b></td>
+							<td align="center" colspan="2"><a class="link2" href="../index.php">Back to Servers</a></td>
+							</tr>';
+					}
+					else
+					{
+						$login = '
+							<tr class="tableinhalt_4" >
+							<td align="center" colspan="3"><a class="link2" href="'.$url.'"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></a></td>
+							<td align="center" colspan="3"><b>Login, to buy Stamm Points</b></td>
+							</tr>';
+					}
 				}
 			} 
-			else 
-				$login = '
-				<tr class="tableinhalt_4" >
-						<td align = "center" colspan="6"><a class="link1" href="../index.php">Back to Servers</a></td>
-						</tr>';
+			else
+			{
+				if ($use_overview)
+				{
+					$login = '
+					<tr class="tableinhalt_4" >
+							<td align="center" colspan="6"><a class="link2" href="../index.php">Back to Servers</a></td>
+							</tr>';
+				}
+				else
+				{
+					$login = '
+					<tr class="tableinhalt_4" >
+							<td align="center" colspan="6"><b>Stamm VIP\'s</b></td>
+							</tr>';
+				}
+			}
 			
 			$tpl->set_var(array(
 				"rank"			  => $index,

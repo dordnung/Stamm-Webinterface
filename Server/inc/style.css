@@ -47,7 +47,7 @@ tr.tableinhalt_3
 
 tr.tableinhalt_4 
 {
-	background: #f8bb01;
+	background: #e69205;
 }
 
 .text1
@@ -66,14 +66,14 @@ tr.tableinhalt_4
 
 a.page_switch:link
 {
-	color:#ffffff;
+	color:#e5e5e6;
 	text-decoration:none;
 	font-family:Verdana;
 	font-size: 12px;
 }
 a.page_switch:visited 
 {
-	color:#ffffff;
+	color:#e5e5e6;
 	text-decoration:none;
 	font-family:Verdana;
 	font-size: 12px;
@@ -124,14 +124,14 @@ a.link2:active
 }
 a.link1:link 
 {
-	color:#ffffff;
+	color:#e5e5e6;
 	text-decoration:none;
 	font-family:Verdana;
 	font-size: 12px;
 }
 a.link1:visited 
 {
-	color:#ffffff;
+	color:#e5e5e6;
 	text-decoration:none;
 	font-family:Verdana;
 	font-size: 12px;
@@ -146,7 +146,7 @@ a.link1:hover
 }
 a.link1:active 
 {
-	color:#ffffff;
+	color:#000000;
 	text-decoration:none;
 	font-size: 12px;
 }

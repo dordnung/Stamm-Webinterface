@@ -13,17 +13,18 @@
  
  1. Dependencies:
 	You need a homepage with MySQL and PHP.
-	To use PayPal, you have to activate cURL und Open SSL in your PHP settings.
+	To use PayPal, you have to activate cURL, Open SSL and allow_url_fopen in your PHP settings.
 	Also you need a Mail Service.
 	
 	For PayPal you also need a PayPal account with Instant Payment Notification
-	https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_admin_IPNSetup
+	https://www.x.com/developers/paypal/documentation-tools/ipn/integration-guide/IPNSetup#id089EG030E5Z
 	
  2. MySQL
 	Import the dbsql.sql with PHPMyAdmin into your MySQL database.
 	
  3. Configuration
 	3.1 Serverlist
+		If you run stamm only on one server, than you only have to upload the contents of the "Server" folder.
 		If you run stamm on more than one server, than you can create a overview of the servers.
 		For every server you have to copy the "Server" folder and you have to rename it.
 		Afterwards you have to open the "config.php" in the mainfolder and have to add the server there.
