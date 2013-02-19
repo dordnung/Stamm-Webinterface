@@ -11,21 +11,14 @@
  *  @copyright  (c) 2012 - David Ordnung
  *  @version    1.1
  */
- 
+ 	session_start();
+	
 	include 'inc/funktion.php';
 	include 'config.php';
 	include "inc/template.inc.php";
 	
 	$akeys = array_keys($level_settings);
 	$avalues = array_values($level_settings);
-	
-	if ($stamm_type == "time")
-	{
-		foreach($level_settings as $level => $points)
-		{
-			$level_settings[$level] = $level_settings[$level] * 60;
-		}
-	}
 
 	protect();
 
@@ -39,8 +32,6 @@
 	$tpl->set_block("paypal", "valid", "valid_handle");
 	$tpl->set_block("paypal", "invalid", "invalid_handle");
 
-	session_start();
-
 	$steamid = calculate_steamid();
 	$sql = "SELECT points, level FROM $table WHERE steamid='$steamid'";
 		  
@@ -48,28 +39,31 @@
 		  
 	if(mysql_num_rows($result))
 	{
-		list($typepoints, $level) = mysql_fetch_row($result);
+		list($typepoints, $levels) = mysql_fetch_row($result);
 		
 		$left = 0;
 		$levelname = $akeys[0];
-
-		if ((int)$level == 0) 
+		$level = pointsToLevel($typepoints);
+		
+		if ($level == 0) 
 			$left = $avalues[0] - (int)$typepoints;
-		else if ((int)$level != count($level_settings))
+		else if ($level != count($level_settings))
 		{
-			$levelname = $akeys[(int)$level];
-			$left = $avalues[(int)$level] - (int)$typepoints;
+			$levelname = $akeys[$level];
+			$left = $avalues[$level] - (int)$typepoints;
 		}
 		else
-			$levelname = $akeys[(int)$level];
+			$levelname = $akeys[$level];
 		
-		if ((int)$level != count($level_settings)) $text = "<h2>You need $left Stamm Points to become $levelname VIP</h2>";
-		else $text = "<h2>You are already the highest VIP</h2>";
+		if ($level != count($level_settings)) 
+			$text = "<h2>You need $left Stamm Points to become $levelname VIP</h2>";
+		else 
+			$text = "<h2>You are already the highest VIP</h2>";
 		
 		$tpl->set_var(array(
 			"typepoints"   => $typepoints,
 			"text"		   => $text,
-			"returnURL"    => curPageURL2(),
+			"returnURL"    => curPageURL(true),
 			"PaypalEmail"  => $paypal_email,
 			"Language"	   => $paypal_language,
 			"steamid"	   => $steamid,
@@ -86,6 +80,7 @@
 				"value"		 	  => $value,
 				"paypal_country"  => $paypal_country
 			));
+			
 			$tpl->parse("paydetails_handle", "paydetails", true);
 		}
 		
@@ -96,6 +91,7 @@
 				"value_set"		 	  => $value,
 				"index_set"  	      => $index
 			));
+			
 			$tpl->parse("paydetailsc_handle", "paydetailsc", true);
 			
 			$index++;

@@ -11,16 +11,23 @@
  *  @copyright  (c) 2012 - David Ordnung
  *  @version    1.1
  */
-
+	session_start();
+	
 	$current_site = (isset($_GET["page"])) ? $_GET["page"]:'1';
 	$searchcat = (isset($_POST['serachcat'])) ? $_POST['serachcat']:'';
 	$searchstring = (isset($_POST['searchstring'])) ? $_POST['searchstring']:'';
 	
-	if ($searchcat == '') $searchcat = (isset($_GET['searchcat'])) ? $_GET['searchcat']:'';
-	if ($searchstring == '') $searchstring = (isset($_GET['search'])) ? $_GET['search']:'';
+	if ($searchcat == '') 
+		$searchcat = (isset($_GET['searchcat'])) ? $_GET['searchcat']:'';
+		
+	if ($searchstring == '') 
+		$searchstring = (isset($_GET['search'])) ? $_GET['search']:'';
 
-	if(isset($current_site)) settype($current_site, "integer");
-	if ($current_site < 1) $current_site = 1;
+	if(isset($current_site)) 
+		settype($current_site, "integer");
+		
+	if ($current_site < 1) 
+		$current_site = 1;
 
 	include "config.php";
 	include "inc/template.inc.php";
@@ -31,10 +38,12 @@
 	
 	if (isset($_POST['ownbutton']) || isset($_GET['ownbutton']))
 	{
-		if (validate())
+		if (validate_login(false))
 		{
-			if ($vips == 0) $sql = "SELECT * FROM ".$table." WHERE points >= ".$points_min." ORDER by points DESC";
-			else $sql = "SELECT * FROM ".$table." WHERE level > 0 AND points >= ".$points_min." ORDER by points DESC";
+			if ($vips == 0) 
+				$sql = "SELECT * FROM ".$table." WHERE points >= ".$points_min." ORDER by points DESC";
+			else 
+				$sql = "SELECT * FROM ".$table." WHERE level > 0 AND points >= ".$points_min." ORDER by points DESC";
 			
 			$result = mysql_query($sql) or die(mysql_error());
 
@@ -53,12 +62,13 @@
 					
 					$index++;
 				}
+				
 				$searchstring = '';
 				$searchcat = '';
 			}
 		}
 	}
-
+	
 	$tpl = new Template();
 	
 	$tpl->set_file("header",       "templates/header.tpl.htm");
@@ -84,9 +94,16 @@
 	
 	if ($current_site > ceil($all_entrys / $show_users)) 
 		$current_site = 1;
+		
 	$start_entry = $current_site * $show_users - $show_users;
 
 	$tpl = showentrys($tpl, "Show %entry% <b>%start%</b> to <b>%end%</b> from <b>%count%</b>" ,"Player", $start_entry, $all_entrys, $show_users);
+
+	if(!isset($section))
+	{
+		$section = '';
+	}
+	
 	$tpl = site_links($tpl, $all_entrys, $show_users, $current_site, $section, $searchcat, $searchstring, '');
 
 	$sql = "SELECT * FROM ".$table." ".$searcquery." ORDER by points DESC LIMIT ".$start_entry.",".$show_users."";
@@ -108,20 +125,21 @@
 			$typename = "Points";
 			$typepoints = $row['points'];
 			$left = 0;
+			$level = pointsToLevel($typepoints);
 
-			if ((int)$row['level'] == 0)
+			if ($level == 0)
 			{
 				$levelname = "No VIP";
 				$left = $avalues[0] - (int)$typepoints;
 			}
-			else if ((int)$row['level'] != count($level_settings))
+			else if ($level != count($level_settings))
 			{
-				$levelname = "".$akeys[(int)$row['level']-1]." VIP";
-				$left = $avalues[(int)$row['level']] - (int)$typepoints;
+				$levelname = "".$akeys[$level-1]." VIP";
+				$left = $avalues[$level] - (int)$typepoints;
 			}
 			else
 			{
-				$levelname = "".$akeys[(int)$row['level']-1]." VIP";
+				$levelname = "".$akeys[$level-1]." VIP";
 				$left = " - ";
 			}
 	
@@ -132,7 +150,7 @@
 			
 			if ($paypal_enable == 1)
 			{
-				if (validate())
+				if (validate_login(false))
 				{
 					$steamid = calculate_steamid();
 				
@@ -158,14 +176,13 @@
 				} 
 				else 
 				{
-					$url = genUrl(curPageURL());
 					$notice = 'Login, to buy Stamm Points via PayPal!';
 					
 					if ($use_overview)
 					{
 						$login = '
 							<tr class="tableinhalt_4" >
-							<td align="center" colspan="2"><a class="link2" href="'.$url.'"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></a></td>
+							<td align="center" colspan="2"><a class="link3" href="paypal.php" ><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></td>
 							<td align="center" colspan="2"><b>Login, to buy Stamm Points</b></td>
 							<td align="center" colspan="2"><a class="link2" href="../index.php">Back to Servers</a></td>
 							</tr>';
@@ -174,7 +191,7 @@
 					{
 						$login = '
 							<tr class="tableinhalt_4" >
-							<td align="center" colspan="3"><a class="link2" href="'.$url.'"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></a></td>
+							<td align="center" colspan="3"><a class="link3" href="paypal.php"><img src="http://cdn.steamcommunity.com/public/images/signinthroughsteam/sits_small.png" alt="Login"/></td>
 							<td align="center" colspan="3"><b>Login, to buy Stamm Points</b></td>
 							</tr>';
 					}

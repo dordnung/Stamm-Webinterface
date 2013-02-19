@@ -11,13 +11,12 @@
  *  @copyright  (c) 2012 - David Ordnung
  *  @version    1.1
  */
- 
 	ini_set('log_errors', true);
 	ini_set('error_log', dirname(__FILE__).'/ipn_errors.log');
 	
 	include 'inc/funktion.php';
 	include 'config.php';
-	include 'ipnlistener.php';
+	include 'inc/ipnlistener.php';
 	
 	$listener = new IpnListener();
 	$verified = false;
@@ -30,6 +29,7 @@
 	catch (Exception $e) 
 	{
 		error_log($e->getMessage());
+		
 		exit(0);
 	}
 	 
@@ -110,8 +110,8 @@
 		(`txnid`, `payer_id`, `payed`, `full_name`, `user_email`, `points`, `steamid`, `date`)
 		VALUES
 		('$txn_id', '$payer_id', '$payed', '$name', '$payer_email', '$points_get', '$steamid'
-		,now())
-		";
+		,now())";
+		
 		mysql_query($sql_insert);
 	}
 ?>

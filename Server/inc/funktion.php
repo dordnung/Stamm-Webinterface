@@ -11,162 +11,123 @@
  *  @copyright  (c) 2012 - David Ordnung
  *  @version    1.1
  */
- 
 	include dirname(__FILE__)."/../config.php";
+	require_once("openid.php");
 
 	$link = mysql_connect($servername, $dbusername, $dbpassword) or die("Couldn't make connection.");
 	$db = mysql_select_db($dbname, $link) or die("Couldn't select database");
 
-	function genUrl($returnUrl)
-	{
-		$returnUrl = (!$returnUrl) ? (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] : $returnUrl;
-		
-		$params = array(
-			'openid.ns'			=> 'http://specs.openid.net/auth/2.0',
-			'openid.mode'		=> 'checkid_setup',
-			'openid.return_to'	=> $returnUrl,
-			'openid.realm'		=> (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
-			'openid.identity'	=> 'http://specs.openid.net/auth/2.0/identifier_select',
-			'openid.claimed_id'	=> 'http://specs.openid.net/auth/2.0/identifier_select',
-		);
-		
-		$sep = '&amp;';
-		return 'https://steamcommunity.com/openid/login?' . http_build_query($params, '', $sep);
-	}
-
-	function validate()
+	function validate_login($doLogin)
 	{
 		global $paypal_enable;
 		
-		session_start();
-		
-		if ($paypal_enable == 0) return false;
+		if ($paypal_enable == 0) 
+			return false;
 		
 		if (isset($_SESSION['HTTP_USER_AGENT']))
 		{
 			if ($_SESSION['HTTP_USER_AGENT'] != md5($_SERVER['HTTP_USER_AGENT']))
 			{
 				logout();
+				
 				return false;
 			}
 		}
 		
 		if (!isset($_SESSION['stamm_steamid64']))
 		{
-			if(isset($_COOKIE['stamm_steamid64']))
+			if(isset($_COOKIE['stamm_steamid64']) && $_COOKIE['stamm_steamid64'] != "")
 			{
 				session_regenerate_id();
+				
 				$_SESSION['stamm_steamid64'] = $_COOKIE['stamm_steamid64'];
 				$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
-				
+
 				return true;
 			}
 		
 		}
-		else return true;
+		else 
+			return true;
 		
-		if (!isset($_GET['openid_signed'])) return false;
+		$openid = new LightOpenID(curPageURL(false));
 		
-		$params = array(
-			'openid.assoc_handle'	=> $_GET['openid_assoc_handle'],
-			'openid.signed'			=> $_GET['openid_signed'],
-			'openid.sig'			=> $_GET['openid_sig'],
-			'openid.ns'				=> 'http://specs.openid.net/auth/2.0',
-		);
-		
-
-		$signed = explode(',', $_GET['openid_signed']);
-		
-		foreach($signed as $item)
+		if(!$openid->mode)
 		{
-			$val = $_GET['openid_' . str_replace('.', '_', $item)];
-			$params['openid.' . $item] = get_magic_quotes_gpc() ? stripslashes($val) : $val; 
+			if (!$doLogin)
+				return false;
+				
+			$openid->identity = "http://steamcommunity.com/openid";
+			$openid->returnUrl = curPageURL(false);
+			
+			header("Location: ".$openid->authUrl());
+			
+			return true;
 		}
-
-		$params['openid.mode'] = 'check_authentication';
 		
-		$data =  http_build_query($params);
-		
-		$context = stream_context_create(array(
-			'http' => array(
-				'method'  => 'POST',
-				'header'  => 
-					"Accept-language: en\r\n".
-					"Content-type: application/x-www-form-urlencoded\r\n" .
-					"Content-Length: " . strlen($data) . "\r\n",
-				'content' => $data,
-			),
-		));
-
-		$result = file_get_contents('https://steamcommunity.com/openid/login', false, $context);
-		
-		preg_match("#^http://steamcommunity.com/openid/id/([0-9]{17,25})#", $_GET['openid_claimed_id'], $matches);
-		$steamID64 = is_numeric($matches[1]) ? $matches[1] : 0;
-
-		$steamid64_finish = preg_match("#is_valid\s*:\s*true#i", $result) == 1 ? $steamID64 : '';
-		
-		if(!empty($steamid64_finish))
+		if($openid->validate())
 		{
+			$communityid = $openid->identity;
+			$communityid = SplitId($communityid);
+				
 			session_regenerate_id (true);
 			
 			$_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
-			$_SESSION['stamm_steamid64'] = $steamid64_finish;
+			$_SESSION['stamm_steamid64'] = $communityid;
 			
 			setcookie("stamm_steamid64", $_SESSION['stamm_steamid64'], time()+60*60*24*10, "/");
 			
 			return true;
 		}
-		
+
 		return false;
+	}
+	
+	function SplitId($communityid)
+	{
+		$string = explode("id/", $communityid);
+		
+		return $string[2];
 	}
 
 	function protect()
 	{
-		if (!validate())
+		if (!validate_login(true))
 		{
-			header("Location: ../index.php");
+			header("Location: index.php");
+			
 			exit();
 		}
 	}
-
-	function curPageURL()
+	
+	function curPageURL($isPayPal)
 	{
 		$pageURL = 'http';
 		
-		if ($_SERVER["HTTPS"] == "on") $pageURL .= "s";
+		if (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") 
+			$pageURL .= "s";
 		
 		$pageURL .= "://";
 		
-		if ($_SERVER["SERVER_PORT"] != "80") $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-		else $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		if ($_SERVER["SERVER_PORT"] != "80") 
+			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+		else
+			$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		
-		return str_replace("funktion", "index", $pageURL);
-	}
-
-	function curPageURL2()
-	{
-		$pageURL = 'http';
-		
-		if ($_SERVER["HTTPS"] == "on") $pageURL .= "s";
-		
-		$pageURL .= "://";
-		
-		if ($_SERVER["SERVER_PORT"] != "80") $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-		else $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-		
-		return str_replace("paypal", "paypal_back", $pageURL);
+		if (!$isPayPal)
+			return str_replace("paypal", "index", $pageURL);
+		else
+			return str_replace("paypal", "paypal_back", $pageURL);
 	}
 
 	function logout()
 	{
-		session_start();
-
 		unset($_SESSION['stamm_steamid64']);
 		unset($_SESSION['HTTP_USER_AGENT']);
 		
 		session_unset();
-		session_destroy(); 
-
+		session_destroy();
+		
 		setcookie("stamm_steamid64", '', time()-60*60*24*10, "/");
 	}
 
@@ -182,24 +143,46 @@
 			
 			return bcadd($result, $part_three);
 		}
-		else return false;
+		else 
+			return false;
 	}
 
 	function calculate_steamid()
 	{
 		$commid = $_SESSION['stamm_steamid64'];
 		
-		if (substr($commid, -1)%2 == 0) $server = 0; 
-		else $server = 1;
+		if (substr($commid, -1)%2 == 0) 
+			$server = 0; 
+		else 
+			$server = 1;
 		 
 		$auth = bcsub($commid, '76561197960265728');
 		
-		if (bccomp($auth, '0') != 1) return "";
+		if (bccomp($auth, '0') != 1) 
+			return "";
 		
 		$auth = bcsub($auth, $server);
 		$auth = bcdiv($auth, 2);
 		
 		return 'STEAM_0:'.$server.':'.$auth;
+	}
+	
+	function pointsToLevel($points)
+	{
+		global $level_settings;
+		
+		$last = 0;
+		$level = 0;
+		
+		foreach($level_settings as $levels => $value)
+		{
+			if ($points < (int)$value)
+				break;
+			$last = (int)$value;	
+			$level++;
+		}
+		
+		return $level;
 	}
 
 	function show_search($tpl, $allsearchcategories, $searchcat, $searchstring, $extracommand)
@@ -221,15 +204,17 @@
 			$tpl->parse("scrollsearchblock_handle", "scrollsearchblock", true);
 		}
 		
-		if (validate())
+		if (validate_login(false))
 		{
 			$steamid = calculate_steamid();
 			$sql = "SELECT points ,level FROM $table WHERE steamid='$steamid'";
 		  
 			$result = mysql_query($sql) OR die(mysql_error());
 				  
-			if(mysql_num_rows($result)) $showmore = '<input name="ownbutton" type="submit" id="ownbutton" value="&nbsp;&nbsp;&nbsp;&nbsp;Your Ranking&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />';
-			else $showmore = "";
+			if(mysql_num_rows($result)) 
+				$showmore = '<input name="ownbutton" type="submit" id="ownbutton" value="&nbsp;&nbsp;&nbsp;&nbsp;Your Ranking&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />';
+			else 
+				$showmore = "";
 		}
 		else $showmore = "";
 		
@@ -246,6 +231,9 @@
 
 	function search_sql_injection_filter($allsearchcategories, $searchcat, $searchstring, $extracommand)
 	{
+		global $link;
+		$searchstring = mysql_real_escape_string($searchstring, $link);
+		
 		if ($searchstring <> '')
 		{
 			$x = 0;
@@ -256,22 +244,28 @@
 				$x++;
 			}
 
-			if ($extracommand == "") return "WHERE ".$allsearchcategories['table'][$x]." LIKE '%$searchstring%'";
-			else return "WHERE ".$allsearchcategories['table'][$x]." LIKE '%$searchstring%' AND ".$extracommand."";
+			if ($extracommand == "")
+				return "WHERE ".$allsearchcategories['table'][$x]." LIKE '%$searchstring%'";
+			else 
+				return "WHERE ".$allsearchcategories['table'][$x]." LIKE '%$searchstring%' AND ".$extracommand."";
 		
 		}
 		else
 		{
-			if ($extracommand == "") return "";
-			else return "WHERE ".$extracommand."";
+			if ($extracommand == "") 
+				return "";
+			else 
+				return "WHERE ".$extracommand."";
 		}
 	}
 
 	function showentrys($tpl ,$text ,$entryname, $start_entry, $all_entrys, $show_clients)
 	{
 
-		if (($all_entrys - $start_entry) < $show_clients) $end_entry = $all_entrys;
-		else $end_entry = ($start_entry + $show_clients);
+		if (($all_entrys - $start_entry) < $show_clients) 
+			$end_entry = $all_entrys;
+		else 
+			$end_entry = ($start_entry + $show_clients);
 
 
 		if ($end_entry != 0) $start_entry = $start_entry +1;
@@ -308,7 +302,7 @@
 		if ($searchstring != '') $tpl->set_var(array("searchstring" => '&amp;search='.$searchstring.''));
 		if ($extracommand != '') $tpl->set_var(array("extracommand" => $extracommand));
 
-		if  ($current_site == 1){}
+		if  ($current_site == 1) {}
 		else
 		{
 			if($current_site > $limit +1)

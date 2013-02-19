@@ -13,14 +13,14 @@
  
  1. Abhängigkeiten:
 	Du brauchst eine Homepage mit MySQL Datenbank und PHP.
-	Um PayPal zu benutzen, musst bei deiner Homepage PHP Konfiguration cURL, Open SSL und allow_url_fopen aktiviert sein.
+	Um PayPal zu benutzen, musst bei deiner Homepage PHP Konfiguration cURL und Open SSL aktiviert sein.
 	Außerdem brauchst du einen Mail Service.
 	
 	Für PayPal brauchst du auch einen PayPal Account mit Instant Payment Notification
 	https://www.x.com/developers/paypal/documentation-tools/ipn/integration-guide/IPNSetup#id089EG030E5Z
 	
  2. MySQL
-	Importiere die dbsql.sql mit PHPMyAdmin in deine Mysql Datenbank.
+	Importiere die dbsql.sql mit z.B PHPMyAdmin in deine Mysql Datenbank.
 	
  3. Konfiguration
 	3.1 Serverliste

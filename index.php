@@ -40,10 +40,12 @@ include 'config.php'
 						
 						foreach($server_options as $folder => $picture)
 						{
-							if ($linecolor == 1) $linecolor = 2;
-							else $linecolor = 1;
+							if ($linecolor == 1) 
+								$linecolor = 2;
+							else 
+								$linecolor = 1;
 
-							echo '<tr class="tableinhalt_'.$linecolor.'" align="center"><td colspan="5"><a href="'.$folder.'"><img src="pics/'.$picture.'" alt="Server" /></a></td></tr>';
+							echo '<tr class="tableinhalt_'.$linecolor.'" align="center"><td colspan="5"><a href="'.$folder.'" class="link"><img src="pics/'.$picture.'" alt="Server" /></a></td></tr>';
 						}
 					?>
 				</tbody>

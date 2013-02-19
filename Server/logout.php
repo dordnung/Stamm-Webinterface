@@ -11,9 +11,11 @@
  *  @copyright  (c) 2012 - David Ordnung
  *  @version    1.1
  */
- 
+  	session_start();
+	
 	include 'inc/funktion.php';
 	
 	logout();
+	
 	header("Location: index.php");
 ?> 

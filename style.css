@@ -34,3 +34,24 @@ tr.tableinhalt_4
 {
 	background: #e69205;
 }
+
+a.link:link 
+{
+	text-decoration:none;
+	border:none;
+}
+a.link:visited 
+{
+	text-decoration:none;
+	border:none;
+}
+a.link:hover 
+{
+	text-decoration:none;
+	border:none;
+}
+a.link:active 
+{
+	text-decoration:none;
+	border:none;
+}

@@ -94,6 +94,26 @@ a.page_switch:active
 	font-size: 12px;
 }
 
+a.link3:link 
+{
+	text-decoration:none;
+	border:none;
+}
+a.link3:visited 
+{
+	text-decoration:none;
+	border:none;
+}
+a.link3:hover 
+{
+	text-decoration:none;
+	border:none;
+}
+a.link3:active 
+{
+	text-decoration:none;
+	border:none;
+}
 a.link2:link 
 {
 	color:#000000;
