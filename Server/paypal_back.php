@@ -12,7 +12,7 @@
  *  @version    1.1
  */
 	ini_set('log_errors', true);
-	ini_set('error_log', dirname(__FILE__).'/ipn_errors.log');
+	ini_set('error_log', '/ipn_errors.log');
 	
 	include 'inc/funktion.php';
 	include 'config.php';

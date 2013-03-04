@@ -11,7 +11,7 @@
  *  @copyright  (c) 2012 - David Ordnung
  *  @version    1.1
  */
-	include dirname(__FILE__)."/../config.php";
+	include "/../config.php";
 	require_once("openid.php");
 
 	$link = mysql_connect($servername, $dbusername, $dbpassword) or die("Couldn't make connection.");
