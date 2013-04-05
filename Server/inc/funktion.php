@@ -139,7 +139,6 @@
 			list($part_one, $part_two, $part_three, $part_four) = explode(':', $steam_id);
 			
 			$result = bcadd('76561197960265728', $part_four * 2);
-			$result = bcadd($result, $part_two);
 			
 			return bcadd($result, $part_three);
 		}
