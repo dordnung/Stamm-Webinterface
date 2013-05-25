@@ -40,22 +40,6 @@ include_once("inc/function.php");
 checkInstall();
 
 
-// Check logout
-if (isset($_GET['logout']))
-{
-	// Logout admin
-	if ($_GET['logout'] == "admin")
-	{
-		logout(false);
-	}
-	else if ($_GET['logout'] == "steam")
-	{
-		// Logout steam
-		logout(true);
-	}
-}
-
-
 
 // SQL class
 $sql = new SQL($dbHost, $dbUser, $dbPass, $dbName);
@@ -70,7 +54,7 @@ if (!$steam)
 	exit();
 }
 	
-	
+
 
 // Steamid
 $steamid = calculateSteamid();
@@ -125,7 +109,7 @@ $skin = getSkin();
 								echo '<li><a href="index.php?server=' .$servername. '">Home</a></li>';
 							}
 							
-							echo '<li><a href="index.php?server=' .$servername. '&amp;logout=steam">Logout</a></li>';
+							echo '<li><a href="index.php?server=' .$servername. '&amp;logout=steam">PayPal Logout</a></li>';
 							?>
 						</ul>
 					</li>
