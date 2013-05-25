@@ -32,5 +32,5 @@
  5. Installieren
 	Gehe nun in deinem Browser zur hochgeladenen "install.php" und erstelle dein Admin Account.
 	
- 6. Fertig stellen
-	Lösche die "install.php" und du bist fertig.
+ 6. Fertig
+	Du bist nun fertig!

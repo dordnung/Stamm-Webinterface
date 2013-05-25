@@ -82,8 +82,9 @@ $default = array_keys($serverOptions);
 $currentSite = (isset($_GET["page"])) ? $_GET["page"] : 1;
 $searchTyp = (isset($_GET['type'])) ? $_GET['type'] : "";
 $search = (isset($_GET['search'])) ? $_GET['search'] : "";
-$server = (isset($_GET['server'])) ? $_GET['server'] : ($default[0]);
 
+$servername = (isset($_GET['server'])) ? $_GET['server'] : ($serverOptions[$default[0]][0]);
+$server = nameToTable($servername);
 
 
 // Check edit user
@@ -231,12 +232,12 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 					
 					if ($paypalEnable)
 					{
-						echo '<li><a href="paypal.php?server=' .$server. '">PayPal</a></li>';
+						echo '<li><a href="paypal.php?server=' .$servername. '">PayPal</a></li>';
 					}
 					
 					if ($admin)
 					{
-						echo '<li><a href="index.php' .$site. 'server=' .$server. '&amp;logout=admin">Logout</a></li>';
+						echo '<li><a href="index.php' .$site. 'server=' .$servername. '&amp;logout=admin">Logout</a></li>';
 					}
 					else
 					{
@@ -251,8 +252,8 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 					<ul>
 						<?php
 					
-						echo '<li><a href="index.php' .$site. 'server=' .$server. '&amp;skin=light">Light Skin</a></li>';
-						echo '<li><a href="index.php' .$site. 'server=' .$server. '&amp;skin=dark">Dark Skin</a></li>';
+						echo '<li><a href="index.php' .$site. 'server=' .$servername. '&amp;skin=light">Light Skin</a></li>';
+						echo '<li><a href="index.php' .$site. 'server=' .$servername. '&amp;skin=dark">Dark Skin</a></li>';
 						
 						?>
 					</ul>
@@ -265,7 +266,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 					// Add all server
 					foreach($serverOptions as $key => $value)
 					{
-						echo '<li><a href="index.php' .$site. 'server=' .$key. '">' .$value[0]. '</a></li>';
+						echo '<li><a href="index.php' .$site. 'server=' .$value[0]. '">' .$value[0]. '</a></li>';
 					}
 					?>
 					</ul>
@@ -357,7 +358,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 			if (isset($_GET['server']))
 			{
 				// Site
-				$site .= "server=$server&amp;";
+				$site .= "server=$servername&amp;";
 			}
 
 			// Get entrys

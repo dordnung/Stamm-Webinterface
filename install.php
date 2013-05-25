@@ -99,7 +99,7 @@ if (isset($_POST["install"]) && isset($_POST["user"]) && isset($_POST["pass"]) &
 		<?php
 		if ($finish)
 		{
-			echo '<meta http-equiv="refresh" content="7; URL=index.php">';
+			echo '<meta http-equiv="refresh" content="5; URL=index.php">';
 		}
 		?>
 		<title>Stamm Install</title>
@@ -158,8 +158,11 @@ if (isset($_POST["install"]) && isset($_POST["user"]) && isset($_POST["pass"]) &
 				{
 					echo '
 					<p>&nbsp;</p> 
-					<p style="color: red; padding-bottom: 30px"><strong>Install Successfull!<br />Please delete the install.php now!</strong></p>
+					<p style="color: red; padding-bottom: 30px"><strong>Installation Successfull!<br />Install.php will now be deleted...</strong></p>
 					';
+					
+					// Remove install
+					unlink("install.php");
 				}
 				?>
 		</div>

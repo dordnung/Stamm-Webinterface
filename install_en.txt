@@ -32,5 +32,5 @@
  5. Install
 	Browse now to the uploaded "install.php" and set up your admin account.
 	
- 6. Finishing
-	Delete the "install.php" and you are finished.
+ 6. Finished
+	You are finished now!

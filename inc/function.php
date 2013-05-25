@@ -47,6 +47,32 @@ function checkInstall()
 
 
 
+// Servername to Tablename
+function nameToTable($name)
+{
+	global $serverOptions;
+	
+	
+	// Loop trough servers
+	foreach($serverOptions as $key => $value)
+	{
+		// Found server
+		if ($value[0] == $name)
+		{
+			return $key;
+		}
+	}
+	
+	
+	// Found nothing
+	$default = array_keys($serverOptions);
+	
+	// Return first table
+	return $default[0];
+}
+
+
+
 // Get Skin
 function getSkin()
 {

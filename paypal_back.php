@@ -75,7 +75,7 @@ $pointsGet = $_POST['option_selection1'];
 
 // Steamid and Table
 $steamid = $steamidTable[0];
-$table = $steamidTable[1];
+$table = nameToTable($steamidTable[1]);
 
 
 

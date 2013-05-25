@@ -77,7 +77,8 @@ $steamid = calculateSteamid();
 
 // Get server
 $default = array_keys($serverOptions);
-$server = (isset($_GET['server'])) ? $_GET['server'] : ($default[0]);
+$servername = (isset($_GET['server'])) ? $_GET['server'] : ($serverOptions[$default[0]][0]);
+$server = nameToTable($servername);
 
 
 
@@ -121,10 +122,10 @@ $skin = getSkin();
 							<?php
 							if ($paypalEnable)
 							{
-								echo '<li><a href="index.php?server=' .$server. '">Home</a></li>';
+								echo '<li><a href="index.php?server=' .$servername. '">Home</a></li>';
 							}
 							
-							echo '<li><a href="index.php?server=' .$server. '&amp;logout=steam">Logout</a></li>';
+							echo '<li><a href="index.php?server=' .$servername. '&amp;logout=steam">Logout</a></li>';
 							?>
 						</ul>
 					</li>
@@ -133,8 +134,8 @@ $skin = getSkin();
 						<ul>
 							<?php
 							
-							echo '<li><a href="paypal.php?server=' .$server. '&amp;skin=light">Light Skin</a></li>';
-							echo '<li><a href="paypal.php?server=' .$server. '&amp;skin=dark">Dark Skin</a></li>';
+							echo '<li><a href="paypal.php?server=' .$servername. '&amp;skin=light">Light Skin</a></li>';
+							echo '<li><a href="paypal.php?server=' .$servername. '&amp;skin=dark">Dark Skin</a></li>';
 							
 							?>
 						</ul>
@@ -147,7 +148,7 @@ $skin = getSkin();
 							// Add all server
 							foreach($serverOptions as $key => $value)
 							{
-								echo '<li><a href="paypal.php?server=' .$key. '">' .$value[0]. '</a></li>';
+								echo '<li><a href="paypal.php?server=' .$value[0]. '">' .$value[0]. '</a></li>';
 							}
 							
 							?>
@@ -250,7 +251,7 @@ $skin = getSkin();
 								<input type="hidden" name="business" value="' .$paypalEmail. '" />
 								<input type="hidden" name="rm" value="2" />
 								<input type="hidden" name="lc" value="' .$paypalLanguage. '" />
-								<input type="hidden" name="custom" value="'. $steamid. ';' .$server. '" />
+								<input type="hidden" name="custom" value="'. $steamid. ';' .$servername. '" />
 								<input type="hidden" name="no_shipping" value="1" />
 								<input type="hidden" name="address_override" value="1" />
 								<input type="hidden" name="on0" value="Stamm Points" />
