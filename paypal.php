@@ -147,7 +147,7 @@ $skin = getSkin();
 							// Add all server
 							foreach($serverOptions as $key => $value)
 							{
-								echo '<li><a href="paypal.php?server=' .$key. '">' .$value. '</a></li>';
+								echo '<li><a href="paypal.php?server=' .$key. '">' .$value[0]. '</a></li>';
 							}
 							
 							?>
@@ -176,8 +176,8 @@ $skin = getSkin();
 				<br />
 				<?php
 				
-				$akeys = array_keys($levelSettings);
-				$avalues = array_values($levelSettings);
+				$akeys = array_keys($serverOptions[$server][1]);
+				$avalues = array_values($serverOptions[$server][1]);
 					
 					
 				echo '<div style="text-align: center; margin-right: auto; margin-left: auto; width: 95%;">';
@@ -204,7 +204,7 @@ $skin = getSkin();
 							$left = " - "; 
 						}
 					}
-					else if ($level != count($levelSettings))
+					else if ($level != count($serverOptions[$server][1]))
 					{
 						$levelname = $akeys[$level];
 						
@@ -227,7 +227,7 @@ $skin = getSkin();
 					
 					
 					
-					if ($level != count($levelSettings) && $avalues[$level-1] != "") 
+					if ($level != count($serverOptions[$server][1]) && $avalues[$level-1] != "") 
 					{
 						echo "<h2>You need $left Stamm Points to become $levelname VIP</h2>";
 					}

@@ -265,7 +265,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 					// Add all server
 					foreach($serverOptions as $key => $value)
 					{
-						echo '<li><a href="index.php' .$site. 'server=' .$key. '">' .$value. '</a></li>';
+						echo '<li><a href="index.php' .$site. 'server=' .$key. '">' .$value[0]. '</a></li>';
 					}
 					?>
 					</ul>
@@ -382,8 +382,8 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 			}
 			else
 			{
-				$akeys = array_keys($levelSettings);
-				$avalues = array_values($levelSettings);
+				$akeys = array_keys($serverOptions[$server][1]);
+				$avalues = array_values($serverOptions[$server][1]);
 
 				// Color and rank
 				if ($skin == "light")
@@ -451,7 +451,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 							$left = " - "; 
 						}
 					}
-					else if ($level != count($levelSettings))
+					else if ($level != count($serverOptions[$server][1]))
 					{
 						$levelName = $akeys[$level-1];
 						

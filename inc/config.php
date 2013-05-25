@@ -49,26 +49,6 @@ $paypalPrices = array
 	"1500" => "14.70",
 	"1800" => "17.65",
 	"2000" => "19.60",
-
-);
-
-
-
-
-
-// Stamm Settings ------------------------------------------------------------------
-
-// Your level settings. Use "<levelname>" => "<points>", (Please order from low points to high points!)
-// For Special levels leave points field blank.
-$levelSettings = array
-(
-	"Bronze" => "500",
-	"Silver" => "1000",
-	"Gold" => "1500",
-	"Platinum" => "2000",
-	"Diamond"  => "2500",
-	"God" => "3000",
-	//"Special" => "",
 );
 
 
@@ -77,13 +57,53 @@ $levelSettings = array
 
 // Server Settings -----------------------------------------------------------------
 
-// Add: "<tablename>" => "<servername>",
+// Here you can define your servers. Please order the points from low points to high points!
+// For Special levels leave points field blank.
+// IMPORTANT: Keep this structur!
 $serverOptions = array
 (
-	"STAMM_DB_1" => "Server1", 
-	//"STAMM_DB_2" => "Server2", 
+	// Tablename
+	"STAMM_DB_1" => array 
+	(
+		// Servername
+		"Server1",
+		
+		// Level Settings
+		array
+		(
+			"Bronze" => "500",
+			"Silver" => "1000",
+			"Gold" => "1500",
+			"Platinum" => "2000",
+			"Diamond"  => "2500",
+			"God" => "3000",
+			//"Special" => "",
+		)
+	),
+	
+	/* To activate this, remove this line
+	
+	// Tablename
+	"STAMM_DB_2" => array 
+	(
+		// Servername
+		"Server2",
+		
+		// Level Settings
+		array
+		(
+			"Bronze" => "500",
+			"Silver" => "1000",
+			"Gold" => "1500",
+			"Platinum" => "2000",
+			"Diamond"  => "2500",
+			"God" => "3000",
+			//"Special" => "",
+		)
+	),
+	
+	To activate this, remove this line */ 
 );
-
 
 
 
