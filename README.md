@@ -22,4 +22,4 @@ Stamm-Webinterface
     * Browse now to the uploaded "install.php" and set up your admin account.  
 
  1. Finishing  
-    * Delete the "install.php" and you are finished.  
+    * You are finished now.  
