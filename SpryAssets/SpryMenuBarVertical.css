@@ -55,7 +55,8 @@ ul.MenuBarVerticallight ul
 	position: absolute;
 	z-index: 1020;
 	cursor: default;
-	width: 8.2em;
+	width: auto;
+	min-width: 8.2em;
 	left: -1000em;
 	top: 0;
 }
@@ -67,7 +68,8 @@ ul.MenuBarVerticallight ul.MenuBarSubmenuVisible
 /* Menu item containers are same fixed width as parent */
 ul.MenuBarVerticallight ul li
 {
-	width: 8.2em;
+	width: auto;
+	min-width: 8.2em;
 }
 
 /*******************************************************************************
@@ -202,7 +204,8 @@ ul.MenuBarVerticaldark ul
 	position: absolute;
 	z-index: 1020;
 	cursor: default;
-	width: 8.2em;
+	width: auto;
+	min-width: 8.2em;
 	left: -1000em;
 	top: 0;
 }
@@ -214,7 +217,8 @@ ul.MenuBarVerticaldark ul.MenuBarSubmenuVisible
 /* Menu item containers are same fixed width as parent */
 ul.MenuBarVerticaldark ul li
 {
-	width: 8.2em;
+	width: auto;
+	min-width: 8.2em;
 }
 
 /*******************************************************************************
