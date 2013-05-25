@@ -7,39 +7,30 @@
  *  http://forums.alliedmods.net/showthread.php?p=1338942
  *
  *  @author     Popoklopsi
- *  @copyright  (c) 2012 - David Ordnung
- *  @version    1.1
+ *  @copyright  (c) 2012-2013 - David Ordnung
+ *  @version    1.2
  */
  
  1. Abhängigkeiten:
 	Du brauchst eine Homepage mit MySQL Datenbank und PHP.
-	Um PayPal zu benutzen, musst bei deiner Homepage PHP Konfiguration cURL und Open SSL aktiviert sein.
+	Um PayPal benutzen zu können, muss bei deiner PHP Konfiguration cURL und Open SSL aktiviert sein.
 	Außerdem brauchst du einen Mail Service.
 	
-	Für PayPal brauchst du auch einen PayPal Account mit Instant Payment Notification
+	Für PayPal brauchst du auch einen PayPal Account mit Instant Payment Notification.
 	https://www.x.com/developers/paypal/documentation-tools/ipn/integration-guide/IPNSetup#id089EG030E5Z
 	
- 2. MySQL
-	Importiere die dbsql.sql mit z.B PHPMyAdmin in deine Mysql Datenbank.
-	
- 3. Konfiguration
-	3.1 Serverliste
-		Wenn du nur einen Server hast, reicht es wenn du den Inhalt des Server Ordners hochlädst!
-		Wenn du Stamm auf mehreren Server laufen lässt, hast du die Möglichkeit vorab eine Serverliste anzuzeigen.
-		Für jeden Server kopierst du den Ordner "Server" und benennst ihn um.
-		Anschließend öffnest du die config.php im Hauptordner und fügst deinen Server dort hinzu.
-		Du kannst für jeden Server ein eigenes Bild in den "pics" Ordner legen.
-	3.2 Webinterface
-		Öffne die config.php im Server Ordner und stelle alles richtig ein!
+ 2. Konfiguration
+	Öffne die "config.php" im "inc" Ordner und stelle alles richtig ein.
 		
- 4. Bilder
-	Im "pics" Ordner findest du die .psd Dateien der Header Bilder.
-	Diese kannst du auf deine Community anpassen und anschließend als .jpg speichern.
-	Die logo.jpg gehört auch im Server Ordner unter "inc/pics" geändert!
+ 3. Logo
+	Im "img" Ordner findest du die .psd Datei des Logos.
+	Diese kannst du auf deine Community anpassen und anschließend als ".png" Datei speichern.
 	
- 5. Hochladen
-	Lade nun alles auf deinen Webspace und nun sollte alles funktionieren!
+ 4. Hochladen
+	Lade nun alles auf deinen Webspace.
 	
- 6. Farben ändern
-	Wenn dir die Farben nicht gefallen, kannst du die style.css im Hauptordner und im Server Ordner unter "inc" anpassen!
+ 5. Installieren
+	Gehe nun in deinem Browser zur hochgeladenen "install.php" und erstelle dein Admin Account.
 	
+ 6. Fertig stellen
+	Lösche die "install.php" und du bist fertig.
