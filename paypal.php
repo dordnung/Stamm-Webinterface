@@ -109,7 +109,7 @@ $skin = getSkin();
 								echo '<li><a href="index.php?server=' .$servername. '">Home</a></li>';
 							}
 							
-							echo '<li><a href="index.php?server=' .$servername. '&amp;logout=steam">PayPal Logout</a></li>';
+							echo '<li><a href="index.php?server=' .$servername. '&amp;logout=steam">Logout</a></li>';
 							?>
 						</ul>
 					</li>

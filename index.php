@@ -237,7 +237,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 					
 					if ($admin)
 					{
-						echo '<li><a href="index.php' .$site. 'server=' .$servername. '&amp;logout=admin">Admin Logout</a></li>';
+						echo '<li><a href="index.php' .$site. 'server=' .$servername. '&amp;logout=admin">Logout</a></li>';
 					}
 					else
 					{
