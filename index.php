@@ -77,6 +77,7 @@ else
 
 
 
+
 // Get page and search
 $default = array_keys($serverOptions);
 $currentSite = (isset($_GET["page"])) ? $_GET["page"] : 1;
@@ -141,6 +142,7 @@ $usersPerPage = $usersPerPage;
 
 
 
+
 // WHERE clause
 if ((int)$onlyVips == 1)
 {
@@ -150,6 +152,7 @@ else
 {
 	$sqlSearch = "WHERE `points` >= $minPoints";
 }
+
 
 
 // Search?
@@ -166,6 +169,73 @@ if (($searchTyp == "name" || $searchTyp == "steamid") && $search != "")
 	// Site
 	$site .= "type=$searchTyp&amp;search=$search&amp;";
 }
+
+
+$nameTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=name&amp;sort=desc"><strong>Name</strong></a>';
+$steamidTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=steamid&amp;sort=desc"><strong>SteamID</strong></a>';
+$levelTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=level&amp;sort=desc"><strong>Level</strong></a>';
+$pointsTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=points&amp;sort=desc"><strong>Points</strong></a>';
+
+// Sorting
+if (isset($_GET["type"]) && isset($_GET["sort"]))
+{
+	if ($_GET["sort"] == "asc")
+	{
+		$sort = "ASC";
+		$op = "desc";
+		$sortImg = "<img alt=\"Sort Up\" src=\"img/arrow_up.png\" width=\"16\" height=\"16\" />";
+	}
+	else
+	{
+		$sort = "DESC";
+		$op = "asc";
+		$sortImg = "<img alt=\"Sort Down\" src=\"img/arrow_down.png\" width=\"16\" height=\"16\" />";
+	}
+	
+	
+	if ($_GET["type"] == "name")
+	{
+		$sqlSearch .= " ORDER by `name`";
+		$nameTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=name&amp;sort=' .$op. '"><strong>name</strong></a>' .$sortImg;
+		$site .= "type=name&amp;";
+	}
+	else if ($_GET["type"] == "steamid")
+	{
+		$sqlSearch .= " ORDER by `steamid`";
+		$steamidTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=steamid&amp;sort=' .$op. '"><strong>SteamID</strong></a>' .$sortImg;
+		$site .= "type=steamid&amp;";
+	}
+	else if ($_GET["type"] == "level")
+	{
+		$sqlSearch .= " ORDER by `level`";
+		$levelTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=level&amp;sort=' .$op. '"><strong>Level</strong></a>' .$sortImg;
+		$site .= "type=level&amp;";
+	}
+	else
+	{
+		$sqlSearch .= " ORDER by `points`";
+		$pointsTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=points&amp;sort=' .$op. '"><strong>Points</strong></a>' .$sortImg;
+		$site .= "type=points&amp;";
+	}
+	
+	if ($_GET["sort"] == "asc")
+	{
+		$site .= "sort=asc&amp;";
+	}
+	else
+	{
+		$site .= "sort=desc&amp;";
+	}
+	
+	$sqlSearch .= " " .$sort;
+}
+else
+{
+	$sqlSearch .= " ORDER by `points` DESC";
+	$pointsTable = '<a class="link1' .$skin. '" href="index.php' .$site. 'page=' .$currentSite. '&amp;server=' .$servername. '&amp;type=points&amp;sort=asc"><strong>Points</strong></a><img alt="Sort Down" src="img/arrow_down.png" width="16" height="16" />';
+}
+
+
 
 
 
@@ -362,7 +432,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 			}
 
 			// Get entrys
-			$result = $sql->query("SELECT * FROM `$server` $sqlSearch ORDER by `points` DESC LIMIT $firstItem, $usersPerPage");
+			$result = $sql->query("SELECT * FROM `$server` $sqlSearch LIMIT $firstItem, $usersPerPage");
 			  
 			// Have any entrys?
 			if (!$sql->foundData($result))
@@ -404,10 +474,10 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 				// Table Layout
 				echo '
 					<td style="width: 7%; padding-left: 3px; padding-top: 2px; padding-bottom:2px"><strong>Rank</strong></td>
-					<td style="width: 32%; padding-left: 3px; padding-top: 2px; padding-bottom:2px"><strong>Name</strong></td>
-					<td style="width: 24%; padding-left: 3px; padding-top: 2px; padding-bottom:2px"><strong>SteamID</strong></td>
-					<td style="width: 18%; padding-left: 3px; padding-top: 2px; padding-bottom:2px"><strong>Level</strong></td>
-					<td style="width: 10%; padding-left: 3px; padding-top: 2px; padding-bottom:2px"><strong>Points</strong></td>
+					<td style="width: 32%; padding-left: 3px; padding-top: 2px; padding-bottom:2px">' .$nameTable. '</td>
+					<td style="width: 24%; padding-left: 3px; padding-top: 2px; padding-bottom:2px">' .$steamidTable. '</td>
+					<td style="width: 18%; padding-left: 3px; padding-top: 2px; padding-bottom:2px">' .$levelTable. '</td>
+					<td style="width: 10%; padding-left: 3px; padding-top: 2px; padding-bottom:2px">' .$pointsTable. '</td>
 					<td style="width: 9%; padding-left: 3px; padding-top: 2px; padding-bottom:2px"><strong>To Next</strong></td>
 				  </tr>';
 				
