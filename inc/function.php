@@ -73,6 +73,31 @@ function nameToTable($name)
 
 
 
+
+// Points to level
+function pointsToLevel($points, $table)
+{
+	global $serverOptions;
+	
+	$current = 0;
+	
+	// Loop trough levels
+	foreach($serverOptions[$table][1] as $key => $value)
+	{
+		if ($points < (int)$value)
+		{
+			return $current;
+		}
+		
+		$current++;
+	}
+	
+	// Must be highest
+	return count($serverOptions[$table][1]);
+}
+
+
+
 // Get Skin
 function getSkin()
 {
