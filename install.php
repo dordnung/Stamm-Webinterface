@@ -162,7 +162,10 @@ if (isset($_POST["install"]) && isset($_POST["user"]) && isset($_POST["pass"]) &
 					';
 					
 					// Remove install
-					unlink("install.php");
+					if (file_exists("install.php"))
+					{
+						unlink("install.php");
+					}
 				}
 				?>
 		</div>
