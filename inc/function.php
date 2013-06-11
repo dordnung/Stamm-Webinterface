@@ -84,6 +84,12 @@ function pointsToLevel($points, $table)
 	// Loop trough levels
 	foreach($serverOptions[$table][1] as $key => $value)
 	{
+		// Special?
+		if ($value == "")
+		{
+			break;
+		}
+		
 		if ($points < (int)$value)
 		{
 			return $current;
@@ -93,7 +99,7 @@ function pointsToLevel($points, $table)
 	}
 	
 	// Must be highest
-	return count($serverOptions[$table][1]);
+	return $current;
 }
 
 

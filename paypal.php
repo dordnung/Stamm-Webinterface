@@ -168,15 +168,25 @@ $skin = getSkin();
 				echo '<div style="text-align: center; margin-right: auto; margin-left: auto; width: 95%;">';
 				
 				
-				$result = $sql->query("SELECT `points` FROM `$server` WHERE `steamid`='$steamid'");
+				$result = $sql->query("SELECT `points`, `level` FROM `$server` WHERE `steamid`='$steamid'");
 				
 				if ($sql->foundData($result))
 				{
-					list($typepoints) = $sql->getRows($result);
+					list($typepoints, $levels) = $sql->getRows($result);
 					
 					$left = 0;
 					$levelname = $akeys[0];
-					$level = pointsToLevel((int)$typepoints, $server);
+					
+					
+					if ($avalues[((int)$levels) - 1] == "")
+					{
+						$level = (int)$levels;
+					}
+					else
+					{
+						$level = pointsToLevel((int)$typepoints, $server);
+					}
+					
 					
 					if ($level == 0)
 					{	
