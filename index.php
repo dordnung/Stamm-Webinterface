@@ -508,7 +508,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 					$typePoints = $row['points'];
 					$left = 0;
 					
-					if ($avalues[((int)$row['level']) - 1] == "")
+					if ((int)$row['level'] == 0 || $avalues[((int)$row['level']) - 1] == "")
 					{
 						$level = (int)$row['level'];
 					}
