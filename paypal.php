@@ -178,7 +178,7 @@ $skin = getSkin();
 					$levelname = $akeys[0];
 					
 					
-					if ($avalues[((int)$levels) - 1] == "")
+					if ($avalues[((int)$levels)] == "")
 					{
 						$level = (int)$levels;
 					}
@@ -222,11 +222,11 @@ $skin = getSkin();
 					
 					
 					
-					if ($level != count($serverOptions[$server][1]) && $avalues[$level-1] != "") 
+					if ($level != count($serverOptions[$server][1]) && $avalues[$level] != "") 
 					{
 						echo "<h2>You need $left Stamm Points to become $levelname VIP</h2>";
 					}
-					else if ($avalues[$level-1] == "")
+					else if ($avalues[$level] == "")
 					{
 						echo "<h2>You are a Special VIP</h2>";
 					}
