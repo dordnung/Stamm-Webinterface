@@ -22,7 +22,7 @@ $minPoints = "100";
 
 
 // PayPal Settings -------------------------------------------------------------
-// Needs activated Instant Payment Notification (https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_admin_IPNSetup)
+// Needs activated Instant Payment Notification (https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/#id089EG030E5Z)
 
 // 1 = Enable Paypal, 0 = Disable
 $paypalEnable = 1;
@@ -30,10 +30,10 @@ $paypalEnable = 1;
 // PayPal Email
 $paypalEmail = "your@email.com";
 
-// Two Letter language code, all see here: https://www.x.com/developers/paypal/documentation-tools/api/country-codes
+// Two Letter language code, all see here: https://developer.paypal.com/docs/classic/api/country_codes/
 $paypalLanguage = "US";
 
-// Your currency, list over all currencies: https://www.x.com/content/currency-codes-e_howto_api_soap_currency_codes-html
+// Your currency, list over all currencies: https://developer.paypal.com/docs/classic/api/currency_codes/#paypal
 $paypalCountry = "USD";
 
 
