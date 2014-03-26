@@ -5,8 +5,8 @@ Stamm-Webinterface
     * You need a homepage with MySQL and PHP.  
     * To use PayPal, cURL and Open SSL have to be enabled in your PHP settings.  
         * You need a Mail Service. 
-        * You need a PayPal account with Instant Payment Notification.  
-            * https://www.x.com/developers/paypal/documentation-tools/ipn/integration-guide/IPNSetup#id089EG030E5Z  
+        * You need a PayPal account with enabled Instant Payment Notification.  
+            * https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/#id089EG030E5Z  
 
  1. Configuration  
     * Open the "config.php" in the "inc" folder and set up everything.  
