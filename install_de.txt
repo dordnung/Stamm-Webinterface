@@ -11,20 +11,20 @@
  *  @version    1.2
  */
  
- 1. Abh‰ngigkeiten:
+ 1. Abh√§ngigkeiten:
 	Du brauchst eine Homepage mit MySQL Datenbank und PHP.
 	
-	Um PayPal benutzen zu kˆnnen, muss bei deiner PHP Konfiguration cURL und Open SSL aktiviert sein.
+	Um PayPal benutzen zu k√∂nnen, muss bei deiner PHP Konfiguration cURL und Open SSL aktiviert sein.
 		Du brauchst einen Mail Service.
-		Du brauchst einen PayPal Account mit Instant Payment Notification.
-			https://www.x.com/developers/paypal/documentation-tools/ipn/integration-guide/IPNSetup#id089EG030E5Z
+		Du brauchst einen PayPal Account mit aktiviertem Instant Payment Notification.
+			https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNSetup/#id089EG030E5Z
 	
  2. Konfiguration
-	÷ffne die "config.php" im "inc" Ordner und stelle alles richtig ein.
+	√ñffne die "config.php" im "inc" Ordner und stelle alles richtig ein.
 		
  3. Logo
 	Im "img" Ordner findest du die .psd Datei des Logos.
-	Diese kannst du auf deine Community anpassen und anschlieﬂend als ".png" Datei speichern.
+	Diese kannst du auf deine Community anpassen und anschlie√üend als ".png" Datei speichern.
 	
  4. Hochladen
 	Lade nun alles auf deinen Webspace.
