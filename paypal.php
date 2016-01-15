@@ -168,7 +168,7 @@ $skin = getSkin();
 				echo '<div style="text-align: center; margin-right: auto; margin-left: auto; width: 95%;">';
 				
 				
-				$result = $sql->query("SELECT `points`, `level` FROM `$server` WHERE `steamid`='$steamid'");
+				$result = $sql->query("SELECT `points`, `level` FROM `".$sql->escape($server)."` WHERE `steamid`='$steamid'");
 				
 				if ($sql->foundData($result))
 				{

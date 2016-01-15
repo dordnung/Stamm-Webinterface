@@ -85,7 +85,7 @@ if (isset($_POST["install"]) && isset($_POST["user"]) && isset($_POST["pass"]) &
 		
 		
 		// Insert admin
-		$sql->query("INSERT INTO `stamm_interface_users` (`username`, `password`) VALUES ('" .$_POST["user"]. "', MD5('" .$_POST["pass"]. "'))");
+		$sql->query("INSERT INTO `stamm_interface_users` (`username`, `password`) VALUES ('" .$sql->escape($_POST["user"]). "', MD5('" .$sql->escape($_POST["pass"]). "'))");
 	}
 	
 }

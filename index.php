@@ -93,7 +93,7 @@ if ($admin && isset($_GET["steamid"]) && isset($_GET["value"]))
 {
 	if ($_GET["value"] != '' && ((int)$_GET["value"] >= 0))
 	{
-		$sql->query("UPDATE `$server` SET `points`=" .$_GET["value"]. " WHERE `steamid`='" .$_GET["steamid"]. "'");
+		$sql->query("UPDATE `$server` SET `points`=" .$sql->escape($_GET["value"]). " WHERE `steamid`='" .$sql->escape($_GET["steamid"]). "'");
 		
 		logAction("Changed points of " .$_GET["steamid"]. " to " .$_GET["value"], $sql);
 	}
@@ -160,11 +160,8 @@ $site = "?";
 
 if (($searchTyp == "name" || $searchTyp == "steamid") && $search != "")
 {
-	// Escape Search
-	$search = $sql->escape($search);
-	
 	// Append to where clause
-	$sqlSearch .= " AND `$searchTyp` LIKE '%" .$search. "%'";
+	$sqlSearch .= " AND `$searchTyp` LIKE '%" .$sql->escape($search). "%'";
 	
 	// Site
 	$site .= "type=$searchTyp&amp;search=$search&amp;";
@@ -240,7 +237,7 @@ else
 
 
 // Calculate Entrys
-$totalEntrys = $sql->getRows($sql->query("SELECT COUNT(`steamid`) FROM `$server` $sqlSearch"));
+$totalEntrys = $sql->getRows($sql->query("SELECT COUNT(`steamid`) FROM `" . $sql->escape($server) ."` $sqlSearch"));
 $totalEntrys = (int)$totalEntrys[0];
 
 
@@ -432,7 +429,7 @@ $firstItem = $currentSite * $usersPerPage - $usersPerPage;
 			}
 
 			// Get entrys
-			$result = $sql->query("SELECT * FROM `$server` $sqlSearch LIMIT $firstItem, $usersPerPage");
+			$result = $sql->query("SELECT * FROM `". $sql->escape($server) ."` $sqlSearch LIMIT $firstItem, $usersPerPage");
 			  
 			// Have any entrys?
 			if (!$sql->foundData($result))

@@ -304,7 +304,7 @@ function validateAdminLogin($doLogin, $user, $pw, $sql)
 			
 			
 			// Check login
-			$result = $sql->query("SELECT * FROM `stamm_interface_users` WHERE `username` = '" .$_SESSION['stamm_user']. "' AND `password` = '" .$_SESSION['stamm_pass']. "' LIMIT 1");
+			$result = $sql->query("SELECT * FROM `stamm_interface_users` WHERE `username` = '" .$sql->escape($_SESSION['stamm_user']). "' AND `password` = '" .$sql->escape($_SESSION['stamm_pass']). "' LIMIT 1");
 			
 			// Login successfull
 			if ($result && $sql->foundData($result))
@@ -327,7 +327,7 @@ function validateAdminLogin($doLogin, $user, $pw, $sql)
 	else
 	{
 		// Check login
-		$result = $sql->query("SELECT * FROM `stamm_interface_users` WHERE `username` = '" .$_SESSION['stamm_user']. "' AND `password` = '" .$_SESSION['stamm_pass']. "' LIMIT 1");
+		$result = $sql->query("SELECT * FROM `stamm_interface_users` WHERE `username` = '" .$sql->escape($_SESSION['stamm_user']). "' AND `password` = '" .$sql->escape($_SESSION['stamm_pass']). "' LIMIT 1");
 			
 		// Login successfull
 		if ($result && $sql->foundData($result))
@@ -355,7 +355,7 @@ function validateAdminLogin($doLogin, $user, $pw, $sql)
 	
 
 	// Check login
-	$result = $sql->query("SELECT * FROM `stamm_interface_users` WHERE `username` = '$user' AND `password` = MD5('$pw') LIMIT 1");
+	$result = $sql->query("SELECT * FROM `stamm_interface_users` WHERE `username` = '". $sql->escape($user) ."' AND `password` = MD5('".$sql->escape($pw)."') LIMIT 1");
 	
 	// Login sucessfull
 	if ($result && $sql->foundData($result))
@@ -514,5 +514,5 @@ function calculateSteamid()
 // Log a action
 function logAction($action, $sql)
 {
-	$sql->query("INSERT INTO `stamm_interface_log` (`action`) VALUES ('$action')");
+	$sql->query("INSERT INTO `stamm_interface_log` (`action`) VALUES ('".$sql->escape($action)."')");
 }
