@@ -43,7 +43,7 @@ class SQL
 	// Escapes a string
 	public function escape($string)
 	{
-		return mysql_escape_string($string);
+		return mysql_real_escape_string($string, $this->db);
 	}
 	
 	// Do a query
