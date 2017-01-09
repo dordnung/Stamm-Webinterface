@@ -36,20 +36,19 @@ class SQL
 	function __construct($host, $user, $pass, $dbName)
 	{
 		// Connect to MySQL
-		$this->db = mysql_connect($host, $user, $pass) or die("Couldn't make connection.");
-		mysql_select_db($dbName, $this->db) or die("Couldn't select database");
+		$this->db = mysqli_connect($host, $user, $pass, $dbName) or die("Couldn't make connection.");
 	}
 	
 	// Escapes a string
 	public function escape($string)
 	{
-		return mysql_real_escape_string($string, $this->db);
+		return mysqli_real_escape_string($this->db, $string);
 	}
 	
 	// Do a query
 	public function query($query)
 	{
-		$result = mysql_query($query, $this->db) or die(mysql_error($this->db));
+		$result = mysqli_query($this->db, $query) or die(mysqli_error($this->db));
 		
 		return $result;
 	}
@@ -57,18 +56,18 @@ class SQL
 	// Check if we found Data
 	public function foundData($result)
 	{
-		return mysql_num_rows($result);
+		return mysqli_num_rows($result);
 	}
 	
 	// Get Rows
 	public function getRows($result)
 	{
-		return mysql_fetch_row($result);
+		return mysqli_fetch_row($result);
 	}
 	
 	// Get Array
 	public function getArray($result)
 	{
-		return mysql_fetch_assoc($result);
+		return mysqli_fetch_assoc($result);
 	}
 }

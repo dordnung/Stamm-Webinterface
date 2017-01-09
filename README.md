@@ -2,7 +2,7 @@ Stamm-Webinterface
 ==================
 
  1. Dependencies:  
-    * You need a homepage with MySQL and PHP.  
+    * You need a homepage with MySQL and PHP with mysqli extension.  
     * To use PayPal, cURL and Open SSL have to be enabled in your PHP settings.  
         * You need a Mail Service. 
         * You need a PayPal account with enabled Instant Payment Notification.  

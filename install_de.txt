@@ -12,7 +12,7 @@
  */
  
  1. Abhängigkeiten:
-	Du brauchst eine Homepage mit MySQL Datenbank und PHP.
+	Du brauchst eine Homepage mit MySQL Datenbank und PHP mit mysqli Erweiterung.
 	
 	Um PayPal benutzen zu können, muss bei deiner PHP Konfiguration cURL und Open SSL aktiviert sein.
 		Du brauchst einen Mail Service.
